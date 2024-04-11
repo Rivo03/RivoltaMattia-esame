@@ -6,7 +6,7 @@ public class ServerTCP {
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
-        HotelManager hotelManager = new HotelManager();
+        GestioneHotel gestioneHotel = new GestioneHotel();
 
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
@@ -16,8 +16,8 @@ public class ServerTCP {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client connected: " + clientSocket.getInetAddress());
 
-                ClientHandler clientHandler = new ClientHandler(clientSocket, hotelManager);
-                clientHandler.start();
+                GestioneClient gestioneClient = new GestioneClient(clientSocket, gestioneHotel);
+                gestioneClient.start();
             }
         } catch (IOException e) {
             e.printStackTrace();

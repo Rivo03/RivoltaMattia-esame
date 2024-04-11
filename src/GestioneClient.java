@@ -4,38 +4,38 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientHandler extends Thread {
+public class GestioneClient extends Thread {
     private final Socket clientSocket;
-    private final HotelManager hotelManager;
+    private final GestioneHotel gestioneHotel;
 
-    public ClientHandler(Socket clientSocket, HotelManager hotelManager) {
+    public GestioneClient(Socket clientSocket, GestioneHotel gestioneHotel) {
         this.clientSocket = clientSocket;
-        this.hotelManager = hotelManager;
+        this.gestioneHotel = gestioneHotel;
     }
 
-    
+
     public void run() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
             out.println("Inserire uno dei seguenti comandi: all, sorted_by_name, with_spa");
-
+            out.println();
             while (true) {
                 String command = in.readLine();
                 if (command == null || command.equalsIgnoreCase("exit")) {
                     break;
                 }
-                command = command.toLowerCase(); // Converti il comando in minuscolo
+                command = command.toLowerCase();
                 switch (command) {
                     case "all":
-                        hotelManager.sendAll(out);
+                        gestioneHotel.sendAll(out);
                         break;
                     case "sorted_by_name":
-                        hotelManager.sendSortedByName(out);
+                        gestioneHotel.sendSortedByName(out);
                         break;
                     case "with_spa":
-                        hotelManager.sendWithSpa(out);
+                        gestioneHotel.sendWithSpa(out);
                         break;
                     default:
                         out.println("Comando non valido. Comandi possibili: all, sorted_by_name, with_spa");

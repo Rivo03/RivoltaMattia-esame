@@ -3,10 +3,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class HotelManager {
+public class GestioneHotel {
     private final List<Hotel> hotels;
 
-    public HotelManager() {
+    public GestioneHotel() {
         hotels = new ArrayList<>();
         hotels.add(new Hotel("Francoforte A", true));
         hotels.add(new Hotel("Miramare", false));
@@ -19,7 +19,7 @@ public class HotelManager {
         for (Hotel hotel : hotels) {
             out.println(hotel.getNome() + " - Spa: " + (hotel.hasSpa() ? "Yes" : "No"));
         }
-        out.println();  // Invio di una riga vuota per segnalare la fine della lista
+        out.println();
     }
 
     public void sendSortedByName(PrintWriter out) {
@@ -27,6 +27,7 @@ public class HotelManager {
         sortedHotels.sort(Comparator.comparing(Hotel::getNome));
         sendAll(out, sortedHotels);
     }
+
 
     public void sendWithSpa(PrintWriter out) {
         List<Hotel> spaHotels = new ArrayList<>();
@@ -42,6 +43,6 @@ public class HotelManager {
         for (Hotel hotel : hotels) {
             out.println(hotel.getNome() + " - Spa: " + (hotel.hasSpa() ? "Yes" : "No"));
         }
-        out.println();  // Invio di una riga vuota per segnalare la fine della lista
+        out.println();
     }
 }
